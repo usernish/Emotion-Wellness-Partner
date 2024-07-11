@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-time Emotion Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 80px); /* Adjust for header height */
+        }
+
+        #video-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 80%; /* Adjust width as needed */
+            max-width: 1200px; /* Limit maximum width */
+            margin: 0 auto; /* Center horizontally */
+            padding: 20px; /* Add padding for spacing */
+        }
+
+        #camera {
+            width: 70%; /* Adjust camera width */
+            height: auto;
+        }
+
+        #playlist {
+            width: 30%; /* Adjust playlist width */
+            font-size: 18px;
+            padding: 20px; /* Add padding for spacing */
+            border: 1px solid #ccc; /* Add border for visibility */
+            box-sizing: border-box; /* Ensure border size is included in width */
+        }
+
+        #get-playlist-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Real-time Emotion Detection</h1>
+    </header>
+    <main>
+        <div id="video-container">
+            <div>
+                <video id="camera" autoplay></video>
+            </div>
+            <div id="playlist"></div>
+        </div>
+        <button id="get-playlist-btn">Get Playlist</button>
+    </main>
+
+    <script>
+        // Access the webcam and display the stream in the video element
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                const videoElement = document.getElementById('camera');
+                videoElement.srcObject = stream;
+            })
+            .catch(err => {
+                console.error('Error accessing webcam: ', err);
+            });
+
+        // Function to fetch and display the playlist URL
+        function getPlaylist() {
+            // Example playlist URL (replace with actual URL)
+            const playlistUrl = 'https://example.com/playlist';
+
+            // Display the playlist URL
+            displayPlaylistUrl(playlistUrl);
+        }
+
+        // Function to display the playlist URL
+        function displayPlaylistUrl(url) {
+            const playlistElement = document.getElementById('playlist');
+            playlistElement.innerText = 'Playlist URL: ' + url;
+        }
+
+        // Add event listener to the "Get Playlist" button
+        document.getElementById('get-playlist-btn').addEventListener('click', getPlaylist);
+    </script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title style="font-family: 'Pacifico', cursive; color: #FF4081;">AI PARTNER</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin: 0;
+            flex-grow: 1;
+            font-size: 24px;
+            font-weight: bold;
+            font-family: 'Pacifico', cursive;
+            color: #FF4081;
+        }
+
+        .chat-container {
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            overflow-y: auto;
+            max-height: 400px;
+        }
+
+        .chat-messages {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .chat-message {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .chat-message img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .user-message {
+            justify-content: flex-end;
+            text-align: right;
+        }
+
+        .chat-bubble {
+            max-width: 70%;
+            padding: 10px;
+            border-radius: 15px;
+            background-color: #4CAF50;
+            color: #fff;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .chat-input-container {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .chat-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .chat-btn {
+            margin-left: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            background-color: #333;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .chat-btn:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://miro.medium.com/max/1200/1*9I6EIL5NG20A8se5afVmOg.gif" alt="Chatbot Image">
+            <h1>AI PARTNER</h1>
+        </div>
+        <div class="chat-container" id="chat-container">
+            <ul class="chat-messages" id="chat-messages">
+                <!-- Chat messages will be displayed here -->
+            </ul>
+        </div>
+        <div class="chat-input-container">
+            <input type="text" class="chat-input" id="user-input" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()" class="chat-btn">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to display chat messages
+        function displayMessage(message, sender) {
+            const chatMessages = document.getElementById('chat-messages');
+            const messageElement = document.createElement('li');
+            messageElement.classList.add('chat-message');
+            messageElement.classList.add(sender === 'User' ? 'user-message' : 'chatbot-message');
+            messageElement.innerHTML = `
+                <img src="${sender === 'User' ? 'https://via.placeholder.com/50' : 'https://miro.medium.com/max/1200/1*9I6EIL5NG20A8se5afVmOg.gif'}" alt="${sender} Image">
+                <div class="chat-bubble">${message}</div>
+            `;
+            chatMessages.appendChild(messageElement);
+            // Scroll to bottom of chat container
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Function to send message
+        function sendMessage() {
+            const userInput = document.getElementById('user-input');
+            const message = userInput.value.trim();
+            if (!message) return; // If message is empty, do nothing
+            displayMessage(message, 'User');
+            userInput.value = ''; // Clear input field
+            // Send message to chatbot and get response
+            getChatbotResponse(message)
+                .then(response => {
+                    displayMessage(response, 'Chatbot');
+                })
+                .catch(error => {
+                    console.error('Error getting response from chatbot:', error);
+                });
+        }
+
+        // Handle key press event (for Enter key)
+        function handleKeyPress(event) {
+            if (event.keyCode === 13 || event.which === 13) {
+                sendMessage();
+            }
+        }
+
+        // Function to get chatbot response (Sample implementation)
+        async function getChatbotResponse(message) {
+            // Emotion-based responses
+            const emotionResponses = {
+                happy: [
+                    "Share a moment that brought a smile to your face. 😊",
+                    "What's something you're excited about? 🎉",
+                    "Tell me about a recent achievement that made you proud. 👍",
+                    "Did you know that spending time with loved ones can boost your happiness? 💖",
+                    "Let's celebrate your happiness! How about treating yourself to something nice today? 🎁"
+                ],
+                sad: [
+                    "Is there something weighing heavy on your heart? 💔",
+                    "Let's talk through what's been troubling you lately. 🤗",
+                    "Here's an interesting fact: Did you know that laughing can reduce stress and improve your mood? 😊",
+                    "Would you like to hear a joke to lighten up your mood? 😄",
+                    "Sometimes listening to your favorite music can uplift your spirits. Do you have a favorite song?"
+                ],
+                neutral: [
+                    "How are you feeling today? Anything on your mind? 🤔",
+                    "Sometimes it's okay to feel neither good nor bad. Just be. 😌",
+                    "Tell me about your day, regardless of how it went. 📅",
+                    "Have you tried practicing mindfulness? It can help you stay grounded and focused. 🧘‍♂️",
+                    "Remember to take breaks and do something you enjoy. Self-care is important. 💖"
+                ],
+                fear: [
+                    "What's been causing you anxiety or fear recently? 😨",
+                    "Fear can be overwhelming. Let's discuss it together. 💪",
+                    "Do you want to talk about what's making you feel scared? 😰",
+                    "Facing your fears can be empowering. Let's work on overcoming them together. 🌟",
+                    "It's okay to feel afraid sometimes. Remember, you're not alone. 💖"
+                ],
+                angry: [
+                    "I sense some frustration. Let's take a deep breath together. Inhale... exhale... 😤",
+                    "It's okay to feel angry sometimes. Let's find a constructive way to deal with it. 💪",
+                    "Would you like to share what's making you feel upset? Venting can help release tension. 🌬️",
+                    "Anger is a natural emotion. Let's explore what triggered it and how we can manage it. 💖",
+                    "Remember, you're in control of your emotions. Let's channel that anger into something positive. 🌟"
+                ]
+            };
+
+            // Check for specific user queries
+            if (message.toLowerCase().includes("hy")) {
+                return "Hi there! How can I assist you today?";
+            } else if (message.toLowerCase().includes("who are you")) {
+                return "I am your AI partner. Feel free to ask anything.";
+            } else if (message.toLowerCase().includes("goodmorning")) {
+                return "Good morning! How are you feeling today?";
+            } else if (message.toLowerCase().includes("iam feel very bad")) {
+                return "Is there something weighing heavy on your heart? 💔";
+            } else if (message.toLowerCase().includes("yes")) {
+                return "Let's talk through what's been troubling you lately. 🤗";
+            } else if (message.toLowerCase().includes("i dont know")) {
+                return "Here's an interesting fact: Did you know that laughing can reduce stress and improve your mood? 😊";
+            } else if (message.toLowerCase().includes("hmm")) {
+                return "Sometimes listening to your favorite music can uplift your spirits. Do you have a favorite song?";
+            } else if (message.toLowerCase().includes("yes") && message.toLowerCase().includes("joke")) {
+                return "You look so beautiful!";
+            } else if (message.toLowerCase().includes("yes") && message.toLowerCase().includes("playlist")) {
+                return "Sure! Here's a playlist of upbeat songs to brighten your day: [Spotify Playlist](https://open.spotify.com/playlist/36ngWEYs1LZqF3KY9lPMN4?si=TGSRnQowQ76Q9ShSK_8shg&pi=a-jLJ3-WrXRYmq)";
+            } else if (message.toLowerCase().includes("okay") || message.toLowerCase().includes("thank you")) {
+                return ["You're welcome! If you need anything else, just let me know!", "No problem! I'm here to help whenever you need."];
+            }
+
+            // Check if message matches any emotion-based responses
+            for (const [emotion, responses] of Object.entries(emotionResponses)) {
+                if (message.toLowerCase().includes(emotion)) {
+                    return responses[Math.floor(Math.random() * responses.length)];
+                }
+            }
+
+            // Default response
+            return "Hi there! How can I assist you today?";
+        }
+    </script>
+</body>
+</html>

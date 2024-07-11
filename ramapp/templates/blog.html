@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Well-being Tool - Blog</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+        }
+        .card {
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            margin-bottom: 30px;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        h1 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #007bff;
+        }
+        h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        ul li {
+            margin-bottom: 10px;
+        }
+        /* Different background colors for each section */
+        .about { background-color: #f8d7da; }
+        .features { background-color: #d4edda; }
+        .emotion-detection { background-color: #cce5ff; }
+        .music-recommendations { background-color: #fff3cd; }
+        .task-recommendations { background-color: #d1ecf1; }
+        .future-enhancements { background-color: #f1f1f1; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Emotion Well-being Tool - Blog</h1>
+
+        <div class="card about">
+            <div class="card-body">
+                <h2>About the Project</h2>
+                <p>This web-based application is developed using the Python Django framework. The main objective of this project is to create a tool that promotes emotional well-being by detecting real-time emotions and providing personalized recommendations.</p>
+            </div>
+        </div>
+
+        <div class="card features">
+            <div class="card-body">
+                <h2>Features</h2>
+                <ul>
+                    <li>Real-time Emotion Detection using OpenCV</li>
+                    <li>Music Recommendations from Spotify</li>
+                    <li>Task Recommendations to Enhance Mood</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card emotion-detection">
+            <div class="card-body">
+                <h2>Emotion Detection</h2>
+                <p>The application uses the FER 2013 dataset to detect human emotions in real-time. OpenCV is utilized for processing and analyzing facial expressions to determine the user's emotional state.</p>
+            </div>
+        </div>
+
+        <div class="card music-recommendations">
+            <div class="card-body">
+                <h2>Music Recommendations</h2>
+                <p>To address copyright issues, the application integrates with Spotify to provide users with personalized music recommendations based on their detected emotions.</p>
+            </div>
+        </div>
+
+        <div class="card task-recommendations">
+            <div class="card-body">
+                <h2>Task Recommendations</h2>
+                <p>The task recommendation mechanism suggests simple tasks tailored to the user's emotional state. For example, if a user is feeling sad, they might be encouraged to "go for a walk" or "talk with loved ones" to improve their mood.</p>
+            </div>
+        </div>
+
+        <div class="card future-enhancements">
+            <div class="card-body">
+                <h2>Future Enhancements</h2>
+                <p>Potential future enhancements to the tool could include expanding the music library, integrating additional emotion detection methods, and refining the task recommendation algorithm.</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
